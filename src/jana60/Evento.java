@@ -91,6 +91,6 @@ public class Evento {
 
 	@Override
 	public String toString() {
-		return data + titolo;
+		return data + " " + titolo;
 	}
 }

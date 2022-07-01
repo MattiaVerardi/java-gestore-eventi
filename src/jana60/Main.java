@@ -23,6 +23,10 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("Inserisci un nuovo evento");
+
+		System.out.print("Premere 1 per Conferenza, 2 per Evento Generico: ");
+		String tipoEvento = scan.nextLine();
+
 		System.out.print("Titolo: ");
 		String inputTitolo = scan.nextLine();
 		System.out.print("Giorno: ");
@@ -35,41 +39,107 @@ public class Main {
 		System.out.print("Posti Totali: ");
 		int inputPostiTotali = Integer.parseInt(scan.nextLine());
 
-		try {
-			Evento evento1 = new Evento(inputTitolo, inputData, inputPostiTotali);
+		String risp = "";
+		switch (tipoEvento) {
 
-			System.out.print("Premere SI per procedere con la prenotazione: ");
-			String risp = scan.nextLine();
+		case "1":
+			System.out.print("Argomento: ");
+			String inputArgomento = scan.nextLine();
+			System.out.print("Nome: ");
+			String inputNome = scan.nextLine();
+			System.out.print("Cognome: ");
+			String inputCognome = scan.nextLine();
+			System.out.print("Titolo Oratore: ");
+			String inputTitoloOr = scan.nextLine();
 
-			if (risp.equalsIgnoreCase("si")) {
-				System.out.print("Inserire il numero di posti che si vuole prenotare: ");
-				int numeroPrenotazioni = Integer.parseInt(scan.nextLine());
-				for (int i = 0; i < numeroPrenotazioni; i++) {
-					evento1.prenota();
+			try {
+				Oratore oratore1 = new Oratore(inputNome, inputCognome, inputTitoloOr);
+				Conferenza conferenza1 = new Conferenza(inputTitoloOr, inputData, inputPostiTotali, inputArgomento,
+						oratore1);
+				// System.out.println(conferenza1);
+
+				while (!risp.equalsIgnoreCase("si") || !risp.equalsIgnoreCase("no")) {
+					System.out.print("Premere SI per procedere con la prenotazione: ");
+					risp = scan.nextLine();
+
+					if (risp.equalsIgnoreCase("si")) {
+						System.out.print("Inserire il numero di posti che si vuole prenotare: ");
+						int numeroPrenotazioni = Integer.parseInt(scan.nextLine());
+						for (int i = 0; i < numeroPrenotazioni; i++) {
+							conferenza1.prenota();
+						}
+						System.out.println("Numero posti prenotati: " + numeroPrenotazioni);
+						System.out.println("Numero posti disponibili: " + conferenza1.postiDisponibili());
+
+						System.out.println();
+
+						System.out.print("Inserire il numero di posti da disdire: ");
+						int numeroDisdette = Integer.parseInt(scan.nextLine());
+						for (int i = 0; i < numeroDisdette; i++) {
+							conferenza1.disdici();
+						}
+						System.out.println("Numero posti disdetti: " + numeroDisdette);
+						System.out.println("Numero posti disponibili: " + conferenza1.postiDisponibili());
+					} else if (risp.equalsIgnoreCase("no")) {
+						System.out.println("Grazie e arrivederci");
+					} else {
+						System.out.println("Riprova");
+					}
 				}
-				System.out.println("Numero posti prenotati: " + numeroPrenotazioni);
-				System.out.println("Numero posti disponibili: " + evento1.postiDisponibili());
 
-				System.out.println();
-
-				System.out.print("Inserire il numero di posti da disdire: ");
-				int numeroDisdette = Integer.parseInt(scan.nextLine());
-				for (int i = 0; i < numeroDisdette; i++) {
-					evento1.disdici();
-				}
-				System.out.println("Numero posti disdetti: " + numeroDisdette);
-				System.out.println("Numero posti disponibili: " + evento1.postiDisponibili());
-			} else if (risp.equalsIgnoreCase("no")) {
-				System.out.println("Grazie e arrivederci");
-			} else {
-				System.out.println("Riprova");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			break;
+
+		case "2":
+			try {
+				Evento evento1 = new Evento(inputTitolo, inputData, inputPostiTotali);
+				// System.out.println(evento1);
+
+				while (!risp.equalsIgnoreCase("si") || !risp.equalsIgnoreCase("no")) {
+					System.out.print("Premere SI per procedere con la prenotazione: ");
+					risp = scan.nextLine();
+
+					if (!risp.equalsIgnoreCase("si") || !risp.equalsIgnoreCase("no")) {
+						System.out.print("Premere SI per procedere con la prenotazione: ");
+						risp = scan.nextLine();
+
+						System.out.print("Inserire il numero di posti che si vuole prenotare: ");
+						int numeroPrenotazioni = Integer.parseInt(scan.nextLine());
+						for (int i = 0; i < numeroPrenotazioni; i++) {
+							evento1.prenota();
+						}
+						System.out.println("Numero posti prenotati: " + numeroPrenotazioni);
+						System.out.println("Numero posti disponibili: " + evento1.postiDisponibili());
+
+						System.out.println();
+
+						System.out.print("Inserire il numero di posti da disdire: ");
+						int numeroDisdette = Integer.parseInt(scan.nextLine());
+						for (int i = 0; i < numeroDisdette; i++) {
+							evento1.disdici();
+						}
+						System.out.println("Numero posti disdetti: " + numeroDisdette);
+						System.out.println("Numero posti disponibili: " + evento1.postiDisponibili());
+					} else if (risp.equalsIgnoreCase("no")) {
+						System.out.println("Grazie e arrivederci");
+					} else {
+						System.out.println("Riprova");
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			break;
+
+		default:
+			break;
 		}
 
 		// chiudo scanner
 		scan.close();
+
 	}
 
 }
