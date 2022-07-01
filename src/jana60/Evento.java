@@ -24,7 +24,7 @@ import java.time.LocalDate;
  *
  */
 
-public class Evento {
+public class Evento implements Comparable<Evento> {
 
 	private String titolo;
 	private LocalDate data;
@@ -92,5 +92,16 @@ public class Evento {
 	@Override
 	public String toString() {
 		return data + " " + titolo;
+	}
+
+	@Override
+	public int compareTo(Evento e) {
+		if (this.data.isBefore(e.data)) {
+			return -1;
+		} else if (this.data.isEqual(e.data)) {
+			return this.titolo.compareTo(e.titolo);
+		} else {
+			return 1;
+		}
 	}
 }

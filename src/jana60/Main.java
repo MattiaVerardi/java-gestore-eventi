@@ -56,7 +56,7 @@ public class Main {
 				Oratore oratore1 = new Oratore(inputNome, inputCognome, inputTitoloOr);
 				Conferenza conferenza1 = new Conferenza(inputTitoloOr, inputData, inputPostiTotali, inputArgomento,
 						oratore1);
-				// System.out.println(conferenza1);
+				System.out.println(conferenza1);
 
 				while (!risp.equalsIgnoreCase("si") || !risp.equalsIgnoreCase("no")) {
 					System.out.print("Premere SI per procedere con la prenotazione: ");
@@ -95,7 +95,7 @@ public class Main {
 		case "2":
 			try {
 				Evento evento1 = new Evento(inputTitolo, inputData, inputPostiTotali);
-				// System.out.println(evento1);
+				System.out.println(evento1);
 
 				while (!risp.equalsIgnoreCase("si") || !risp.equalsIgnoreCase("no")) {
 					System.out.print("Premere SI per procedere con la prenotazione: ");

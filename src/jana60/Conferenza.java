@@ -3,11 +3,11 @@ package jana60;
 import java.time.LocalDate;
 
 /**
- * Creare una classe Conferenza che estende Evento, che ha anche gli attributi -
- * argomento - oratore L’oratore, a sua volta, è caratterizzato da: - nome -
- * cognome - titolo Modificare il metodo main in modo che al momento della
- * creazione dell’evento venga richiesto se è una conferenza, e in tal caso
- * valorizzare tutti i parametri. Quando si stampano i dettagli della
+ * MILESTONE 3 Creare una classe Conferenza che estende Evento, che ha anche gli
+ * attributi - argomento - oratore L’oratore, a sua volta, è caratterizzato da:
+ * - nome - cognome - titolo Modificare il metodo main in modo che al momento
+ * della creazione dell’evento venga richiesto se è una conferenza, e in tal
+ * caso valorizzare tutti i parametri. Quando si stampano i dettagli della
  * Conferenza, oltre a data e titolo, devono apparire anche le informazioni
  * sull’oratore e sull’argomento.
  *
@@ -35,6 +35,6 @@ public class Conferenza extends Evento {
 
 	@Override
 	public String toString() {
-		return toString() + " " + argomento + " " + oratore;
+		return super.toString() + " " + argomento + " " + oratore;
 	}
 }
